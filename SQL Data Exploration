@@ -31,6 +31,14 @@ SELECT location, MAX(cast(total_deaths as int)) as total_death_count
  GROUP BY location, population
  order by total_death_count desc
  
+ Select location, SUM(cast(new_deaths as int)) as TotalDeathCount
+From `my-free-project-343214.CovidDeaths.CovidDeaths_Table
+--Where location like '%states%'
+Where continent is null 
+and location not in ('World', 'European Union', 'International')
+Group by location
+order by TotalDeathCount desc
+ 
  -- Let`s break things down by contiment
 -- Showing continents with the highest death count per population
 SELECT continent, MAX(cast(total_deaths as int)) as total_death_count 
